@@ -1,0 +1,60 @@
+@import "src/@fuse/scss/fuse";
+
+#patient-list {
+    .content-card {
+        overflow: auto;
+    }
+    .patient-table {
+        flex: 1 1 auto;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+
+        @include media-breakpoint('lt-md') {
+            width: 1100px;
+        }
+
+        .mat-header-row {
+            min-height: 64px;
+        }
+
+        .mat-cell {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .mat-column-avatar {
+            flex: 0 1 80px;
+        }
+
+        .mat-column-firstName {
+            flex: 0 1 12%;
+        }
+
+        .mat-column-midName {
+            flex: 0 1 12%;
+        }
+
+        .mat-column-lastName {
+            flex: 0 1 12%;
+        }      
+
+        .mat-column-parentage {
+            flex: 0 1 12%;
+        }
+
+        .mat-column-phoneNo {
+            flex: 0 1 15%;
+        }
+
+        .mat-column-age {
+            flex: 0 1 15%;
+        }
+
+        .mat-column-action {
+            flex: 0 1 18%;
+        }
+
+    }
+
+}

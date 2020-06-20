@@ -1,0 +1,105 @@
+<div class="page-layout carded fullwidth inner-scroll listing-page" id="patient-list">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+
+    <div class="center">
+
+        <div class="header accent"
+             fxLayout="column" fxLayout.gt-sm="row"
+             fxLayoutAlign="center center" fxLayoutAlign.gt-sm="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxHide.lt-md class="mb-24 mb-md-0"
+                 fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="s-32 mr-16">person_outline</mat-icon>
+                <span class="h1">Patients</span>
+            </div>
+
+            <!-- Search -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input [formControl]="searchControl" placeholder=" Search for a patient">
+                </div>
+            </div>
+
+            <!-- Add Patient -->
+            <button [routerLink]="'/patient/add'" class="fuse-white mt-24 mt-md-0"
+                    mat-raised-button>
+                <span>ADD PATIENT</span>
+            </button>
+
+        </div>
+
+        <div class="content-card">
+
+            <mat-table [dataSource]="patients"
+                       class="patient-table" fusePerfectScrollbar matSort>
+
+                <ng-container matColumnDef="avatar">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <ngx-avatar [name]="element.fullName" [size]="35"></ngx-avatar>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="firstName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="midName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Middle Name</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.middleName}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="lastName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+                </ng-container>             
+
+                <ng-container matColumnDef="parentage">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Parentage</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.parentage}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="phoneNo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Phone No.</mat-header-cell>
+                    <mat-cell
+                            *matCellDef="let element"> {{element.phoneNo}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="age">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Age</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.age}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <button (click)="deletePatient(element)" mat-icon-button>
+                            <mat-icon class="mat-18">delete</mat-icon>
+                        </button>
+                        <a style="text-decoration: none;" [queryParams]="{id:element.id}" [routerLink]="'/patient/detail'"
+                           mat-icon-button>
+                            <mat-icon>history</mat-icon>
+                            <span>Details</span>
+                        </a>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+            </mat-table>
+
+            <mat-paginator #paginator [length]="patientPaginated?.totalCount" [pageIndex]="patientPaginated?.page - 1"
+                           [pageSizeOptions]="[5, 10, 25, 100]"
+                           [pageSize]="patientPaginated?.pageSize">
+            </mat-paginator>
+
+        </div>
+
+    </div>
+
+</div>

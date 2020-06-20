@@ -20,6 +20,19 @@ export const navigation: FuseNavigation[] = [
                     bg       : '#F44336',
                     fg       : '#FFFFFF'
                 }
+            },
+            {
+                id       : 'patients',
+                title    : 'Patients',               
+                type     : 'item',
+                icon     : 'directions_run',
+                url      : '/patients',
+                badge    : {
+                    title    : '25',
+                    translate: 'NAV.SAMPLE.BADGE',
+                    bg       : '#F44336',
+                    fg       : '#FFFFFF'
+                }
             }
         ]
     }

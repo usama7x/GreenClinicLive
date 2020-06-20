@@ -18,7 +18,10 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
-
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
+import { PatientsModule } from './views/patients/patients.module';
+import { ToastrModule } from 'ngx-toastr';
 const appRoutes: Routes = [
     {
         path      : '**',
@@ -34,8 +37,12 @@ const appRoutes: Routes = [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        RouterModule.forRoot(appRoutes),
-
+        AppRoutingModule,
+        SharedModule,
+        PatientsModule,
+        ToastrModule.forRoot({
+            positionClass: 'toast-bottom-right'
+        }),
         TranslateModule.forRoot(),
 
         // Material moment date module
