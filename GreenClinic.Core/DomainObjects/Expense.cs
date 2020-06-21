@@ -5,9 +5,8 @@ using System.Text;
 
 namespace GreenClinic.Core.DomainObjects
 {
-    public class Expense
-    {
-        public int ExpenseID { get; set; }
+    public class Expense : Entity
+    {        
         [Required, MaxLength(50)]
         public string Type { get; set; }
         [Required]

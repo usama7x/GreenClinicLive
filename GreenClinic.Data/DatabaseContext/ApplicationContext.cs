@@ -15,13 +15,8 @@ namespace GreenClinic.Data.DatabaseContext
     }
 
     public class ApplicationContext: IdentityDbContext<IdentityUser>, IApplicationContext
-    {
-        readonly IConfiguration configuration;
-        public ApplicationContext(IConfiguration configuration, DbContextOptions<ApplicationContext> options):base(options)
-        {
-            this.configuration = configuration;
-           
-        }
+    {        
+        public ApplicationContext(DbContextOptions<ApplicationContext> options):base(options){}
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Checkup> Checkups { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
@@ -35,7 +30,7 @@ namespace GreenClinic.Data.DatabaseContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             
-            optionsBuilder.UseMySql(configuration.GetConnectionString("ClinicConnectionString"), x => 
+            optionsBuilder.UseMySql("server=localhost; database=GreenClinic; user=root; password=root", x => 
             x.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName));
             base.OnConfiguring(optionsBuilder);
             

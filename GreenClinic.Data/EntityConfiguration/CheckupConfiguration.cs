@@ -11,7 +11,7 @@ namespace GreenClinic.Data.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Checkup> builder)
         {
-            builder.HasKey(x => x.CheckupID);
+            builder.HasKey(x => x.Id);
             builder.HasMany<CheckupMedicine>(c => c.Medicines)
             .WithOne(c => c.Checkup)
             .HasForeignKey(f => f.CheckupID)

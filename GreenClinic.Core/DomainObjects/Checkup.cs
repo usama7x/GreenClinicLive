@@ -5,10 +5,9 @@ using System.Text;
 
 namespace GreenClinic.Core.DomainObjects
 {
-    public class Checkup
-    {
-        public int CheckupID { get; set; }
-        public int PatientID { get; set; }
+    public class Checkup: Entity
+    {        
+        public string PatientID { get; set; }
         public virtual Patient Patient { get; set; }
         public string Findings { get; set; }
         public string Allergy { get; set; }

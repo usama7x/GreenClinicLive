@@ -28,14 +28,14 @@ namespace GreenClinic
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddTransient<ApplicationContext>(x => new ApplicationContext(Configuration, new Microsoft.EntityFrameworkCore.DbContextOptions<ApplicationContext>()));
-
+            //services.AddTransient<ApplicationContext>(x => new ApplicationContext(Configuration, new Microsoft.EntityFrameworkCore.DbContextOptions<ApplicationContext>()));
+            services.AddDbContext<ApplicationContext>();
            
            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -76,9 +76,7 @@ namespace GreenClinic
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-            System.Console.WriteLine(context.Database.ProviderName);
-            System.Console.WriteLine(Configuration.GetConnectionString("ClinicConnectionString"));
-            context.Database.EnsureCreated();
+           
         }
     }
 }

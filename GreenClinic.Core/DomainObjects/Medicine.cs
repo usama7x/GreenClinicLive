@@ -5,9 +5,8 @@ using System.Text;
 
 namespace GreenClinic.Core.DomainObjects
 {
-    public class Medicine
-    {
-        public int MedicineID { get; set; }
+    public class Medicine : Entity
+    {        
 
         [Required, MaxLength(50)]
         public string MedicineName { get; set; }

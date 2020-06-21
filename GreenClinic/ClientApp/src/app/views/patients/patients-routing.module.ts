@@ -7,11 +7,8 @@ const routes: Routes = [
   {
     path: '',
     component: PatientListComponent
-  },
-  {
-    path: 'patients',
-    component: PatientListComponent
   }
+  
 ];
 
 @NgModule({
