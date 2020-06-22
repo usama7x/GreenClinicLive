@@ -14,7 +14,7 @@ export class PatientViewService extends PaginationBaseService<any> implements Da
     constructor(protected http: HttpClient) {
         super(http);
         this.pageSize = 10;
-        this.baseUrl = '/api/Patients';
+        this.baseUrl = '/api/Customer/patients';
          // You can optionally initialize with some default values,
         // e.g. for sorting, page size or custom url query attributes
         this.sort = {
