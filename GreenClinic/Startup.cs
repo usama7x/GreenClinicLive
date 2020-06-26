@@ -15,15 +15,22 @@ namespace GreenClinic
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                            .SetBasePath(env.ContentRootPath)
+                            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                            .AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
+        public ILifetimeScope AutofacContainer { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
@@ -36,11 +43,16 @@ namespace GreenClinic
             services.AddDbContext<ApplicationContext>();
 
             
-            var builder = new ContainerBuilder();
-            builder.RegisterModule(new ClinicDependencyModule());
-            builder.Populate(services);
-            return new AutofacServiceProvider(builder.Build());
+            //var builder = new ContainerBuilder();
+            //builder.RegisterModule(new ClinicDependencyModule());
+            //builder.Populate(services);
+            //return new AutofacServiceProvider(builder.Build());
 
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new ClinicDependencyModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
