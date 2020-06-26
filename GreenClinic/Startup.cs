@@ -1,4 +1,7 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using GreenClinic.Data.DatabaseContext;
+using GreenClinic.System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -6,6 +9,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace GreenClinic
 {
@@ -19,7 +23,7 @@ namespace GreenClinic
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
@@ -30,8 +34,13 @@ namespace GreenClinic
 
             //services.AddTransient<ApplicationContext>(x => new ApplicationContext(Configuration, new Microsoft.EntityFrameworkCore.DbContextOptions<ApplicationContext>()));
             services.AddDbContext<ApplicationContext>();
-           
-           
+
+            
+            var builder = new ContainerBuilder();
+            builder.RegisterModule(new ClinicDependencyModule());
+            builder.Populate(services);
+            return new AutofacServiceProvider(builder.Build());
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -17,6 +17,7 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Autofac.Extras.Quartz" Version="5.2.0" />
     <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="LightQuery.EntityFrameworkCore" Version="1.9.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
       <PrivateAssets>all</PrivateAssets>
@@ -39,6 +40,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GreenClinic.Core\GreenClinic.Core.csproj" />
     <ProjectReference Include="..\GreenClinic.Data\GreenClinic.Data.csproj" />
+    <ProjectReference Include="..\GreenClinic.Services\GreenClinic.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

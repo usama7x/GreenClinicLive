@@ -24,7 +24,7 @@ export class PatientListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   private patientPaginatedSubscription: Subscription;
-  
+
   
   constructor(private patientService: PatientService,
               private patientView: PatientViewService,
