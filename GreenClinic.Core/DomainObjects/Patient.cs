@@ -19,9 +19,15 @@ namespace GreenClinic.Core.DomainObjects
         public string PhoneNo { get; set; }
         public int Age { get; set; }
         public double Weight { get; set; }
-        public char Gender { get; set; }
+        public Gender Gender { get; set; }
         [MaxLength(255)]
         public string Address { get; set; }
         public virtual ICollection<Checkup> Checkups { get; set; }
+    }
+
+    public enum Gender
+    {
+        Male,
+        Female
     }
 }

@@ -1,0 +1,273 @@
+<div class="page-layout carded fullwidth inner-scroll" id="patient">
+
+    <div class="top-bg accent"></div>
+  
+    <div class="center">
+  
+      <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+  
+        <div fxLayout="row" fxLayoutAlign="start center">
+  
+          <button (click)="navigateToPreviousPage()" class="mr-0 mr-sm-16" mat-icon-button>
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+  
+          <div fxLayout="column" fxLayoutAlign="start start">
+            <div *ngIf="isEdit" class="h2" (click)="scanElement.focus()">
+              {{patient.firstName}} {{patient.midName}} {{patient.lastName}}
+            </div>
+            <div *ngIf="!isEdit" class="h2" (click)="scanElement.focus()">
+              New Patient
+            </div>
+          </div>
+  
+        </div>
+  
+        <button (click)="onSavepatient()"
+                [disabled]="!basicForm.valid"
+                class="save-product-button"
+                mat-raised-button>
+          <span>{{isEdit ? "UPDATE" : "SAVE"}}</span>
+        </button>
+  
+      </div>
+  
+      <div class="content-card">
+  
+        <div class="content p-24" fusePerfectScrollbar>
+  
+          <form #basicForm="ngForm" method="POST">
+  
+            <div fxLayout="row" fxLayoutAlign="start start">           
+  
+              <!-- Scan Content -->
+              <textarea fxFlex="30" #scanElement [(ngModel)]="scanContent" [formControl]="scanControl"
+                        autofocus class="ml-60"
+                        name="scan"
+                        style="border: 0; overflow: hidden; resize: none; font-size: 1px; background-color: white;"
+                        tabindex="0">
+              </textarea>
+  
+            </div>
+  
+            <div class="mt-12" fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-md="column" fxLayoutAlign.lt-md="space-between center">
+  
+              <div [ngClass]="'w-100-p'" fxFlex.gt-sm="48">
+  
+                <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-md="column" fxLayoutAlign.lt-md="space-between center">
+  
+             
+  
+               </div> 
+  
+                <!-- <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-md="column" fxLayoutAlign.lt-md="space-between center"> -->
+  
+                  <!-- Email -->
+                  <!-- <mat-form-field appearance="outline" floatLabel="always" fxFlex.gt-sm="45">
+                    <mat-label>Email</mat-label>
+                    <input [(ngModel)]="patient.email" matInput name="email"
+                           placeholder="Email"
+                           type="text">
+                  </mat-form-field> -->
+  
+                  <!-- Phone No. -->
+                  <!-- <mat-form-field appearance="outline" floatLabel="always" fxFlex.gt-sm="45">
+                    <mat-label>Phone number</mat-label>
+                    <input [(ngModel)]="patient.phoneNumber" matInput
+                           name="phoneNumber"
+                           placeholder="Phone Number" type="text">
+                  </mat-form-field>
+  
+                </div> -->
+  
+                <div fxLayout="row" fxLayoutAlign="space-between start">
+  
+                  <!-- First Name -->
+                  <mat-form-field class="w-50-p" appearance="outline" floatLabel="always">
+                    <mat-label>First name</mat-label>
+                    <input #FirstNameControl="ngModel" [(ngModel)]="patient.firstName"
+                           matInput name="productName"
+                           placeholder="First Name" required
+                           type="text">
+                    <mat-error
+                            *ngIf="FirstNameControl.hasError('required') && FirstNameControl.touched"
+                            class="text-danger">First name is required
+                    </mat-error>
+                  </mat-form-field>
+  
+                </div>
+  
+                <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-md="column" fxLayoutAlign.lt-md="space-between center">
+  
+                  <!-- Middle Name -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex.gt-sm="45" class="w-25-p">
+                    <mat-label>Middle name</mat-label>
+                    <input [(ngModel)]="patient.midName" matInput
+                           name="middleName"
+                           placeholder="Middle Name" type="text">
+                  </mat-form-field>
+  
+                  <!-- Last Name -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex.gt-sm="45" class="w-25-p">
+                    <mat-label>Last name</mat-label>
+                    <input [(ngModel)]="patient.lastName" matInput
+                           name="lastName"
+                           placeholder="Last name" type="text">
+                  </mat-form-field>
+  
+                </div>
+  
+                <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-md="column" fxLayoutAlign.lt-md="space-between center">
+  
+                  <!-- Gender -->
+                  <mat-form-field appearance="outline" fxFlex.gt-sm="45">
+                    <mat-label>Gender</mat-label>
+                    <select [(ngModel)]="patient.gender" matNativeControl
+                            name="gender"
+                            placeholder="Gender">
+                      <option value="0">Male</option>
+                      <option value="1">Female</option>
+                    </select>
+                  </mat-form-field>
+  
+                  <!-- Age -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex.gt-sm="45">
+                    <mat-label>Age</mat-label>
+                    <input [(ngModel)]="patient.age" matInput
+                           name="age"
+                           placeholder="Age">          
+                  </mat-form-field>
+  
+                </div>
+  
+              </div>
+  
+              <div [ngClass]="'w-100-p'" fxFlex.gt-sm="48">
+  
+                <!-- <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-md="column" fxLayoutAlign.lt-md="space-between center"> -->
+  
+                  <!-- Parentage -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex.gt-sm="45">
+                    <mat-label>Parentage</mat-label>
+                    <input [(ngModel)]="patient.parentage" autocomplete="off"
+                           matInput
+                           name="stateId" placeholder="Parentage"
+                           type="text">
+                  </mat-form-field>
+  
+                  <!-- Phone Number -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex.gt-sm="45">
+                    <mat-label>Phone No.</mat-label>
+                    <input [(ngModel)]="patient.phoneNo" matInput  name="idExpiry" placeholder="Phone Number" >             
+                  </mat-form-field>
+  
+                </div>
+  
+                <div fxLayout="row" fxLayoutAlign="space-between start">
+  
+                  <!-- Address -->
+                  <mat-form-field class="w-100-p" appearance="outline" floatLabel="always">
+                    <mat-label>Address</mat-label>
+                    <input [(ngModel)]="patient.address" matInput
+                           name="address" placeholder="Address"
+                           type="text">
+                  </mat-form-field>
+  
+                </div>
+  
+                <div [ngClass]="'w-100-p'" fxFlex.gt-sm="48">
+
+                <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-md="column" fxLayoutAlign.lt-md="space-between center">
+  
+                  <!-- Age -->
+                  <!-- <mat-form-field appearance="outline" floatLabel="always" fxFlex.gt-sm="30">
+                    <mat-label>Age</mat-label>
+                    <input [(ngModel)]="patient.age" matInput name="city"
+                           placeholder="Age"
+                           type="text">
+                  </mat-form-field> -->
+  
+                  <!-- Weight -->
+                  <mat-form-field appearance="outline" floatLabel="always" fxFlex.gt-sm="30">
+                    <mat-label>Weight</mat-label>
+                    <input [(ngModel)]="patient.weight" matInput name="state"
+                           placeholder="Weight"
+                           type="text">
+                  </mat-form-field>
+  
+                  <!-- Zipcode -->
+                  <!-- <mat-form-field appearance="outline" floatLabel="always" fxFlex.gt-sm="30">
+                    <mat-label>Zipcode</mat-label>
+                    <input [(ngModel)]="patient.zipCode" matInput
+                           name="zipCode"
+                           placeholder="Zipcode" type="text">
+                  </mat-form-field> -->
+  
+                <!-- </div> -->
+  
+                <!-- <div fxLayout="row" fxLayoutAlign="space-around start" fxLayout.lt-md="column" fxLayoutAlign.lt-md="space-between center">
+  
+                  <label class="checkbox checkbox-fill-primary">
+                    <input [(ngModel)]="patient.isTaxExempt" [checked]="patient.isTaxExempt"
+                           name="isTaxExempt"
+                           type="checkbox">
+                    <span class="ml-8">Sales Tax Exempt</span>
+                  </label>
+  
+                  <label class="checkbox checkbox-fill-primary">
+                    <input [(ngModel)]="patient.isVeteranMilitary" [checked]="patient.isVeteranMilitary"
+                           name="isVeteranMilitary"
+                           type="checkbox">
+                    <span class="ml-8">Veteran/Military</span>
+                  </label>
+  
+                </div>
+  
+                <div class="mt-12" fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-md="column" fxLayoutAlign.lt-md="space-between center">
+  
+                  <div fxFlex.gt-sm="45">
+                    <mat-form-field *ngIf="patient.isTaxExempt" appearance="outline" floatLabel="always">
+                      <mat-label>Tax Exemption No</mat-label>
+                      <input [(ngModel)]="patient.taxExemptionNo" matInput
+                             name="taxExemptionNo"
+                             placeholder="Tax Exemption No" type="text">
+                    </mat-form-field>
+                  </div>
+  
+                  <div fxFlex.gt-sm="45">
+                    <mat-form-field *ngIf="patient.isVeteranMilitary" appearance="outline" floatLabel="always">
+                      <mat-label>Veteran / Military No</mat-label>
+                      <input [(ngModel)]="patient.veteranMilitaryNumber" matInput
+                             name="veteranMilitary"
+                             placeholder="Veteran / Military No" type="text">
+                    </mat-form-field>
+                  </div>
+  
+                </div>
+  
+                <div fxLayout="row" fxLayoutAlign="start start">
+  
+                  <mat-form-field class="w-100-p" appearance="outline" floatLabel="always">
+                    <mat-label>Additional Notes here</mat-label>
+                    <textarea [(ngModel)]="patient.notes" matInput name="notes"
+                              placeholder="Notes" type="text"></textarea>
+                  </mat-form-field>
+  
+                </div> -->
+  
+              </div>
+                </div>
+  
+            </div>
+  
+          </form>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  
+  </div>
+  
+  

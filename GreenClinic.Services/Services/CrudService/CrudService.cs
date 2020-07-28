@@ -5,12 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GreenClinic.Services.Services.CrudService
 {
     public interface ICrudService<TEntity> where TEntity: Entity
     {
-       
+        Task<TEntity> UpsertAsync(TEntity entity);
     }
     public class CrudService<TEntity>: ICrudService<TEntity> where TEntity : Entity
     {
@@ -22,5 +23,10 @@ namespace GreenClinic.Services.Services.CrudService
         }
 
         public IQueryable<TEntity> Store => _repository.GetStore();
+
+        public async Task<TEntity> UpsertAsync(TEntity entity)
+        {
+            return await _repository.UpsertAsync(entity);
+        }
     }
 }

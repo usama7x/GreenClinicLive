@@ -1,20 +1,21 @@
-﻿using System;
+﻿using GreenClinic.Core.Views;
+using GreenClinic.Handlers;
+using GreenClinic.ViewModels;
+using LightQuery.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using LightQuery.EntityFrameworkCore;
-using GreenClinic.Core.Views;
-using GreenClinic.Handlers;
 
 namespace GreenClinic.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PatientsController : Controller
+    public class PatientController : ControllerBase
     {
         readonly PatientHandler _patientHandler;
-        public PatientsController(PatientHandler patientHandler)
+        public PatientController(PatientHandler patientHandler)
         {
             _patientHandler = patientHandler;
         }
@@ -25,6 +26,14 @@ namespace GreenClinic.Controllers
         public IActionResult GetAllAsync([FromQuery] string filter)
         {
             return Ok(_patientHandler.GetPatients(filter));
+        }
+
+        [HttpPost]
+        [Route("updatePatient")]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> PutAsync(PatientViewModel patientView)
+        {
+            return Ok(await _patientHandler.UpsertAsync(patientView));
         }
     }
 }

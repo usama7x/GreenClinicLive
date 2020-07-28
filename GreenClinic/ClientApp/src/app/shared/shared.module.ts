@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { SharedComponentsModule } from './components/shared-components.module';
+import { DatePipe } from '@angular/common';
 
  
 
 @NgModule({
     imports: [SharedComponentsModule],
-    entryComponents: []
+    entryComponents: [],
+    providers: [DatePipe]
 })
 export class SharedModule {
 

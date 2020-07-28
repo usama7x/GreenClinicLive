@@ -1,11 +1,12 @@
 ﻿using GreenClinic.Core.DomainObjects;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace GreenClinic.Core.Views
+namespace GreenClinic.ViewModels
 {
-    public class PatientView
+    public class PatientViewModel
     {
         public string Id { get; set; }
         public string FirstName { get; set; }
@@ -13,10 +14,11 @@ namespace GreenClinic.Core.Views
         public string LastName { get; set; }
         public string Parentage { get; set; }
         public string PhoneNo { get; set; }
-        public int Age { get; set; }
+        public double Age { get; set; }
         public double Weight { get; set; }
         public Gender Gender { get; set; }
         public string Address { get; set; }
         public DateTime Stamp { get; set; }
     }
+
 }

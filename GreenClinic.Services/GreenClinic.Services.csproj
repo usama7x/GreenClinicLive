@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GreenClinic.Core\GreenClinic.Core.csproj" />
     <ProjectReference Include="..\GreenClinic.Data\GreenClinic.Data.csproj" />
   </ItemGroup>
 

@@ -13,6 +13,6 @@
  }
 
  export enum Gender {
-     Male = 10,
-     Female = 20
+     Male = 1,
+     Female = 0
  }

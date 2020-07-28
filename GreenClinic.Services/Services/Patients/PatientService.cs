@@ -14,6 +14,7 @@ namespace GreenClinic.Services.Services.Patients
     public interface IPatientService: ICrudService<Patient>
     {
         IQueryable<PatientView> GetPatientViews(string filter);
+       
     }
     public class PatientService : CrudService<Patient>, IPatientService
     {

@@ -20,7 +20,9 @@ import { SampleModule } from 'app/main/sample/sample.module';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { PatientsModule } from './views/patients/patients.module';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { ToastrModule } from 'ngx-toastr';
+import { SharedComponentsModule } from './shared/components/shared-components.module';
 const appRoutes: Routes = [
     {
         path      : '**',
@@ -35,10 +37,11 @@ const appRoutes: Routes = [
     imports     : [
         BrowserModule,
         BrowserAnimationsModule,
+        BsDatepickerModule.forRoot(),
         HttpClientModule,
         AppRoutingModule,
         SharedModule,
-        PatientsModule,
+        PatientsModule,        
         ToastrModule.forRoot({
             positionClass: 'toast-bottom-right'
         }),

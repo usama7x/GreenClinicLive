@@ -4,6 +4,7 @@ using GreenClinic.Data.DatabaseContext;
 using GreenClinic.System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
@@ -32,7 +33,11 @@ namespace GreenClinic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddMvc()
+                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0)
+                .AddControllersAsServices();
+               
+            //services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -70,11 +75,20 @@ namespace GreenClinic
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            if (!env.IsDevelopment())
+            app.UseStaticFiles();         
+            app.UseSpaStaticFiles(new StaticFileOptions()
             {
-                app.UseSpaStaticFiles();
-            }
+                OnPrepareResponse = context =>
+                {
+                    var headers = context.Context.Response.GetTypedHeaders();
+                    headers.CacheControl = new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+                    {
+                        Public = true,
+                        MaxAge = TimeSpan.FromDays(0)
+                    };
+                }
+            });
+            
 
             app.UseRouting();
 
@@ -91,6 +105,7 @@ namespace GreenClinic
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
+
 
                 if (env.IsDevelopment())
                 {

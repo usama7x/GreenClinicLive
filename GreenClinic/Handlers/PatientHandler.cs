@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using GreenClinic.Core.DomainObjects;
 using GreenClinic.Core.Views;
 using GreenClinic.Services.Services.Patients;
-using System;
-using System.Collections.Generic;
+using GreenClinic.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,6 +22,13 @@ namespace GreenClinic.Handlers
         public IQueryable<PatientView> GetPatients(string filter)
         {
             return _patientService.GetPatientViews(filter);
+        }
+        
+        public async Task<PatientView> UpsertAsync(PatientViewModel patientview)
+        {
+            var patient = _mapper.Map<Patient>(patientview);
+            var result = await _patientService.UpsertAsync(patient);
+            return _mapper.Map<PatientView>(patient);
         }
     }
 }

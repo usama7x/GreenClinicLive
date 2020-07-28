@@ -18,12 +18,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AvatarModule } from 'ngx-avatar';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AddPatientComponent } from 'app/shared/components/add-patient/add-patient.component';
+import { SharedComponentsModule } from 'app/shared/components/shared-components.module';
 
 
 @NgModule({
   declarations: [PatientListComponent],
   imports: [
     CommonModule,
+    SharedComponentsModule,
     PatientsRoutingModule,
     MatTableModule,
     ValidatorsModule,

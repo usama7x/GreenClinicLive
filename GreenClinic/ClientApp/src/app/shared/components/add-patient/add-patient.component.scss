@@ -1,0 +1,38 @@
+@import "src/@fuse/scss/fuse";
+
+#patient {
+
+    .header {
+        min-height: 100px !important;
+        max-height: 100px !important;
+        height: 100px !important;
+    }
+
+    .content {
+
+        // .mat-form-field {
+        //     width: 100%;
+        // }
+
+        .patient-image {
+            overflow: hidden;
+            width: 256px;
+            height: 164px;
+            margin-right: 16px;
+            border-radius: 4px;
+
+            img {
+                height: 100%;
+                width: auto;
+                max-width: none;
+            }
+        }
+
+        // Temporary prefix alignment fix
+        .mat-form-field-appearance-outline .mat-form-field-prefix,
+        .mat-form-field-appearance-outline .mat-form-field-suffix {
+            top: 0;
+        }
+    }
+
+}

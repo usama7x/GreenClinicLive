@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Patient } from '../Models/Patient';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -26,8 +26,11 @@ export class PatientService {
         return this.http.post<Patient>('/api/Patient/add', patient);
     }
 
-    updatePatient(patient: Patient): Observable<any> {
-        return this.http.put<any>('/api/Patient/updatePatient/', patient);
+    updatePatient(patient: Patient): Observable<any> {   
+        const body = JSON.stringify(patient);
+        const header = new HttpHeaders()
+        .set('content-type', 'application/json');    
+        return this.http.post<any>('/api/Patient/updatePatient/', body, {headers: header});
     }
 
     deletePatientById(id): Observable<any> {
