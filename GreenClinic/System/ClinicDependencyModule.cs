@@ -25,7 +25,19 @@ namespace GreenClinic.System
             
             //register your mapper
             //builder.Register<IMapper>(x => new Mapper(x.Resolve<IConfigurationProvider>(), x.Resolve)).As<IMapper>();
-            builder.Register<IMapper>(x => new Mapper(config)).As<IMapper>();
+            //builder.Register<IMapper>(x => new Mapper(config)).As<IMapper>();
+            builder.Register(c =>
+            {
+                //This resolves a new context that can be used later.
+                var context = c.Resolve<IComponentContext>();
+                var config = new MapperConfiguration(cfg => {
+                    cfg.AddMaps(GetType().Assembly);
+                    cfg.AddMaps(typeof(ServiceModule).Assembly);
+                    cfg.AddMaps(typeof(ApplicationContext).Assembly);
+                });
+                return config.CreateMapper(context.Resolve);
+            }).As<IMapper>()
+            .InstancePerLifetimeScope();
             
         }
     }

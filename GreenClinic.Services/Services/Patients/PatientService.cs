@@ -49,7 +49,7 @@ namespace GreenClinic.Services.Services.Patients
                 Weight = x.Weight,
                 Parentage = x.Parentage,
                 Address = x.Address,
-                Gender = x.Gender,               
+                //Gender = x.Gender,               
                 PhoneNo = x.PhoneNo,
                 Stamp = x.Stamp
             });

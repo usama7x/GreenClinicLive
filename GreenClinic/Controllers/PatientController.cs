@@ -28,9 +28,7 @@ namespace GreenClinic.Controllers
             return Ok(_patientHandler.GetPatients(filter));
         }
 
-        [HttpPost]
-        [Route("updatePatient")]
-        [IgnoreAntiforgeryToken]
+        [HttpPut("updatePatient")]
         public async Task<IActionResult> PutAsync(PatientViewModel patientView)
         {
             return Ok(await _patientHandler.UpsertAsync(patientView));

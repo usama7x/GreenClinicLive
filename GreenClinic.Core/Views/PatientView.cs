@@ -13,7 +13,7 @@ namespace GreenClinic.Core.Views
         public string LastName { get; set; }
         public string Parentage { get; set; }
         public string PhoneNo { get; set; }
-        public int Age { get; set; }
+        public double Age { get; set; }
         public double Weight { get; set; }
         public Gender Gender { get; set; }
         public string Address { get; set; }

@@ -19,18 +19,15 @@ export class PatientService {
     }
 
     getAll(): Observable<any> {
-        return this.http.get<any>('/api/Customer');
+        return this.http.get<any>('/api/Patient');
     }
 
     addPatient(patient: Patient): Observable<Patient> {
         return this.http.post<Patient>('/api/Patient/add', patient);
     }
 
-    updatePatient(patient: Patient): Observable<any> {   
-        const body = JSON.stringify(patient);
-        const header = new HttpHeaders()
-        .set('content-type', 'application/json');    
-        return this.http.post<any>('/api/Patient/updatePatient/', body, {headers: header});
+    updatePatient(patient: Patient): Observable<any> {      
+        return this.http.put<any>('/api/Patient/updatePatient/', patient);
     }
 
     deletePatientById(id): Observable<any> {
