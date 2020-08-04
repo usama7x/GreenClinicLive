@@ -42,6 +42,7 @@ export class PatientListComponent implements OnInit, OnDestroy {
 
   loadPatients(): void {
     this.patients = this.patientView;
+    console.log(this.patients);
     this.patientView.pageSize = 10;
     this.searchControl.valueChanges
             .pipe(debounceTime(200), distinctUntilChanged())

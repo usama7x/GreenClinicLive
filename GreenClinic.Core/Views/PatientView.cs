@@ -11,6 +11,7 @@ namespace GreenClinic.Core.Views
         public string FirstName { get; set; }
         public string MidName { get; set; }
         public string LastName { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
         public string Parentage { get; set; }
         public string PhoneNo { get; set; }
         public double Age { get; set; }
