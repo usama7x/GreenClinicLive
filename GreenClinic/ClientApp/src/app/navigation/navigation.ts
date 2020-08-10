@@ -8,12 +8,12 @@ export const navigation: FuseNavigation[] = [
         type     : 'group',
         children : [
             {
-                id       : 'sample',
-                title    : 'Sample',
+                id       : 'dashboard',
+                title    : 'Dashboard',
                 translate: 'NAV.SAMPLE.TITLE',
                 type     : 'item',
                 icon     : 'email',
-                url      : '/sample',
+                url      : '/dashboard',
                 badge    : {
                     title    : '25',
                     translate: 'NAV.SAMPLE.BADGE',
@@ -26,9 +26,22 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Patients',               
                 type     : 'item',
                 icon     : 'directions_run',
-                url      : '/patients',
+                url      : '/patient',
                 badge    : {
                     title    : '25',
+                    translate: 'NAV.SAMPLE.BADGE',
+                    bg       : '#F44336',
+                    fg       : '#FFFFFF'
+                }
+            },
+            {
+                id       : 'checkup',
+                title    : 'Checkup',               
+                type     : 'item',
+                icon     : 'directions_run',
+                url      : '/checkup',
+                badge    : {
+                    title    : '12',
                     translate: 'NAV.SAMPLE.BADGE',
                     bg       : '#F44336',
                     fg       : '#FFFFFF'

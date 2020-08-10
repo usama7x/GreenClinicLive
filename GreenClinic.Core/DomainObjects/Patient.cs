@@ -24,12 +24,13 @@ namespace GreenClinic.Core.DomainObjects
         public Gender Gender { get; set; }
         [MaxLength(255)]
         public string Address { get; set; }
+        public bool IsRemoved { get; set; }
         public virtual ICollection<Checkup> Checkups { get; set; }
     }
 
     public enum Gender
     {
-        Male,
-        Female
+        Male = 0,
+        Female = 1
     }
 }

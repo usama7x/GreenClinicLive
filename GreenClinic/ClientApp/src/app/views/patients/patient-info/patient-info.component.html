@@ -1,0 +1,124 @@
+<div class="p-24" id="patient-info">
+
+    <div class="card-grid"
+         [@animate]="{value:'*',params:{y:'-25px'}}">
+  
+      <div class="fuse-card indigo">
+        <div class="h4">Total Visits</div>
+        <div class="h2 text-bold">{{patientInfo?.storeCredit|currency}}</div>
+      </div>
+  
+      <div class="fuse-card indigo">
+        <div class="h4">Total Medicines</div>
+        <div class="h2 text-bold">{{patientInfo?.totalOrders}}</div>
+      </div>
+  
+      <div class="fuse-card indigo">
+        <div class="h4">Avg Wait</div>
+        <div class="h3 text-bold">{{patientInfo?.averageCheckTime}}</div>
+      </div>
+  
+      <div class="fuse-card indigo">
+        <div class="h4">Check-Ins</div>
+        <div class="h2 text-bold">{{patientInfo?.totalChecks}}</div>
+      </div>
+  
+      <div class="fuse-card indigo">
+        <div class="h4">Total Spent</div>
+        <div class="h2 text-bold">{{patientInfo?.totalSpent|currency}}</div>
+      </div>
+  
+    </div>
+  
+    <div fxLayout="column" fxLayoutAlign="start"
+         [@animate]="{value:'*',params:{y:'50px'}}">
+  
+      <fieldset class="mt-24">
+  
+        <legend class="h2 accent-fg">General Information</legend>
+  
+        <div class="mt-8" fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign="start"
+             fxLayoutAlign.gt-md="space-between start">
+  
+          <div fxFlex.gt-md="45" fxLayout="column" fxLayoutAlign="space-between">
+  
+            <div class="my-8" fxLayout="row" fxLayoutAlign="start center">
+              <div class="h4" fxFlex="50">First Name:</div>
+              <div class="h3" fxFlex="50">{{patientInfo?.firstName}}</div>
+            </div>
+  
+            <div class="my-8" fxLayout="row" fxLayoutAlign="start center">
+              <div class="h4" fxFlex="50">Middle Name:</div>
+              <div class="h3" fxFlex="50">{{patientInfo?.midName ? patientInfo?.midName : '-'}}</div>
+            </div>
+  
+            <div class="my-8" fxLayout="row" fxLayoutAlign="start center">
+              <div class="h4" fxFlex="50">Last Name:</div>
+              <div class="h3" fxFlex="50">{{patientInfo?.lastName ? patientInfo?.lastName : '-'}}</div>
+            </div>
+  
+            <div class="my-8" fxLayout="row" fxLayoutAlign="start center">
+              <div class="h4" fxFlex="50">Gender:</div>
+              <div class="h3" fxFlex="50">{{patientInfo?.gender == 0 ? 'Male' : 'Female'}}</div>
+            </div>
+  
+            <div class="my-8" fxLayout="row" fxLayoutAlign="start center">
+              <div class="h4" fxFlex="50">Age</div>
+              <div class="h3" fxFlex="50">{{patientInfo?.age}}</div>
+            </div>  
+            
+            <div class="my-8" fxLayout="row" fxLayoutAlign="start center">
+                <div class="h4" fxFlex="50">Weight</div>
+                <div class="h3" fxFlex="50">{{patientInfo?.weight}}</div>
+              </div>   
+  
+          </div>
+  
+          <!-- <div fxFlex.gt-md="45" fxLayout="column" fxLayoutAlign="space-between">           
+  
+            <legend class="h2 accent-fg">Contact Information</legend>
+       
+            <div class="my-8" fxLayout="row" fxLayoutAlign="start center">
+                <div class="h4" fxFlex="50">Phone Number:</div>
+                <div class="h3" fxFlex="50">{{patientInfo?.phoneNumber ? patientInfo?.phoneNumber : '-'}}</div>
+              </div>
+    
+              <div class="my-8" fxLayout="row" fxLayoutAlign="start center">
+                <div class="h4" fxFlex="50">Address:</div>
+                <div class="h3" fxFlex="50">{{patientInfo?.address}}</div>
+              </div>
+  
+          </div> -->
+  
+        </div>
+  
+      </fieldset>
+  
+      <fieldset class="mt-20">
+  
+        <legend class="h2 accent-fg">Contact Information</legend>
+  
+        <div class="mt-8" fxLayout="row" fxLayoutAlign="space-between start">
+  
+          <div fxFill fxFlex.gt-md="45" fxLayout="column" fxLayoutAlign="space-between">        
+  
+            <div class="my-8" fxLayout="row" fxLayoutAlign="start center">
+              <div class="h4" fxFlex="50">Phone Number:</div>
+              <div class="h3" fxFlex="50">{{patientInfo?.phoneNo ? patientInfo?.phoneNo : '-'}}</div>
+            </div>
+  
+            <div class="my-8" fxLayout="row" fxLayoutAlign="start center">
+              <div class="h4" fxFlex="50">Address:</div>
+              <div class="h3" fxFlex="50">{{patientInfo?.address}}</div>
+            </div>
+  
+          </div>
+  
+        </div>
+  
+      </fieldset>
+  
+    </div>
+  
+  </div>
+  

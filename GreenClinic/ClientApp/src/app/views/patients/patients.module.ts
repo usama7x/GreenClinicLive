@@ -20,10 +20,15 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AddPatientComponent } from 'app/shared/components/add-patient/add-patient.component';
 import { SharedComponentsModule } from 'app/shared/components/shared-components.module';
+import { PatientDetailComponent } from './patient-detail/patient-detail.component';
+import { MatListModule } from '@angular/material/list';
+import { FuseSidebarModule } from '@fuse/components';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PatientInfoComponent } from './patient-info/patient-info.component';
 
 
 @NgModule({
-  declarations: [PatientListComponent],
+  declarations: [PatientListComponent, PatientDetailComponent, PatientInfoComponent],
   imports: [
     CommonModule,
     SharedComponentsModule,
@@ -43,8 +48,9 @@ import { SharedComponentsModule } from 'app/shared/components/shared-components.
     MatPaginatorModule,
     MatToolbarModule,
     FuseSharedModule,
-    NgSelectModule
-
+    NgSelectModule,
+    MatListModule,
+    FuseSidebarModule
   ]
 })
 export class PatientsModule { }

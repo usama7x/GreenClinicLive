@@ -1,0 +1,88 @@
+<div class="modal-header">
+    <h1 class="modal-title accent-fg" id="modal-basic-title">Patient List</h1>
+    <button (click)="bottomSheetRef.dismiss()" aria-label="Close" class="close" type="button">
+      <span aria-hidden="true" style="font-size: 32px;">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body pt-0" style="overflow-x: hidden;">
+        <mat-card class="mb-3">
+        <mat-card-content>
+            <div class="row">
+    
+            <div class="col-md-6 py-0  px-3 ">
+                <mat-form-field class="mat-form-control" style="width: 80%;">
+                <input [formControl]="searchControl" id="search" matInput placeholder="Search Patient"
+                        type="email">
+                <mat-hint>Type to Search Name, Medical Id</mat-hint>
+                </mat-form-field>
+            </div>
+    
+            <div class="col-md-6 py-0 px-3  text-right">
+                <button [routerLink]="'/patient/add'" (click)="bottomSheetRef.dismiss()" color="accent" mat-mini-fab>
+                <mat-icon class="mat-18">add_circule</mat-icon>
+                </button>
+            </div>
+    
+            </div>
+        </mat-card-content>
+        </mat-card>
+
+        <div class="row">
+            <div class="col-md-6">
+              <div class="t-container mat-elevation-z8 ">
+                <div class="table-container">
+                  <mat-table [dataSource]="patients" class="mat-elevation-z4" matSort fusePerfectScrollbar>
+        
+                    <ng-container matColumnDef="fullName">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+                      <mat-cell *matCellDef="let element">
+                        <a
+                           style="cursor: pointer; color: #119bf7; align-content: left;">
+                          {{element.firstName}} {{element.midName}} {{element.lastName}}
+                        </a>
+                      </mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="parentage">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Parentage</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.parentage}} </mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="phoneNo">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Contact Number</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.phoneNo}} </mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="address">
+                      <mat-header-cell *matHeaderCellDef> Address</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="update">
+                      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                      <mat-cell *matCellDef="let element">
+                        <button (click)="editPatient(element.id)"  mat-raised-button>
+                          <mat-icon class="mat-18">edit</mat-icon>
+                        </button>
+                        <button class="ml-4" (click)="checkIn(element.id)" color="accent"
+                                mat-raised-button>
+                          <mat-icon class="mat-18">timer</mat-icon>
+                          CheckIn
+                        </button>
+                      </mat-cell>
+                    </ng-container>
+        
+                    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+        
+                </div>
+                <mat-paginator [length]="patientPaginated?.totalCount" [pageIndex]="patientPaginated?.page - 1"
+                               [pageSizeOptions]="[5, 10, 25, 100]"
+                               [pageSize]="patientPaginated?.pageSize"></mat-paginator>
+              </div>
+        
+            </div>
+    </div>
+    

@@ -8,13 +8,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GreenClinic.Services.Services.Patients
 {
     public interface IPatientService: ICrudService<Patient>
     {
-        IQueryable<PatientView> GetPatientViews(string filter);
-       
+        IQueryable<PatientView> GetPatientViews(string filter);     
+
+
     }
     public class PatientService : CrudService<Patient>, IPatientService
     {
@@ -54,6 +56,19 @@ namespace GreenClinic.Services.Services.Patients
                 Stamp = x.Stamp
             });
 
+        }
+
+         
+        public override async Task<Patient> DeleteByIdAsync(string id)
+        {
+            var patient = await FindAsync(id);
+            return await DeleteAsync(patient);
+        }
+
+        public override async Task<Patient> DeleteAsync(Patient entity)
+        {
+            entity.IsRemoved = true;
+            return await base.UpdateAsync(entity);
         }
     }
 }

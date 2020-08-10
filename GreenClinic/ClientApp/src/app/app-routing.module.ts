@@ -1,11 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PatientListComponent } from './views/patients/patient-list/patient-list.component';
+import { SampleComponent } from './main/sample/sample.component';
 
 const routes: Routes = [
-    { path: 'patients',
+    {
+      path: '',
+      component: SampleComponent,
+      pathMatch: 'full'
+    },
+    { path: 'patient',
       loadChildren: () => import('./views/patients/patients.module').then(m => m.PatientsModule)      
-    }    
+    },
+    {
+      path: 'checkup',
+      loadChildren: () => import('./views/checkups/checkups.module').then(m => m.CheckupsModule)
+    } 
 ];
 
 @NgModule({

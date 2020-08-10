@@ -1,0 +1,18 @@
+#patient-info {
+
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+    }
+
+    .fuse-card {
+        min-width: 180px;
+        max-width: 180px;
+        min-height: 80px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+}

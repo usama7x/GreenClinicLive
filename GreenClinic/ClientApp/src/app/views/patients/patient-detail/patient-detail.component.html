@@ -1,0 +1,94 @@
+<div class="page-layout carded left-sidebar inner-scroll">
+
+    <div class="top-bg accent"></div>
+  
+    <fuse-sidebar class="sidebar" lockedOpen="gt-sm" name="sidebar" position="left">
+  
+      <div class="header p-24 accent">
+        <h2 class="m-0" fxHide.gt-sm>Patient Detail</h2>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+  
+          <button class="mt-20 ml-20" (click)='navigateToPreviousPage()' fxHide fxShow.gt-sm mat-icon-button>
+            <mat-icon class="font-size-40" [@animate]="{value:'*',params:{delay:'50ms',x:'-25px'}}">arrow_back</mat-icon>
+          </button>
+  
+        </div>
+      </div>
+  
+        <div class="content p-24" fusePerfectScrollbar>
+            <div [@animate]="{value:'*',params:{y:'50px'}}" class="sidebar">
+  
+                <mat-list>
+                    <mat-list-item (click)="changeViewIndex(0)" [ngClass]="{'active':patientViewIndex==0}"
+                           class="border-bottom" style="cursor: pointer;">
+                        <span>General Information</span>
+                    </mat-list-item>
+                    
+                    <mat-list-item (click)="changeViewIndex(1)" [ngClass]="{'active':patientViewIndex==1}"
+                           class="border-bottom" style="cursor: pointer;">
+                        <span>History </span>
+                    </mat-list-item>                    
+                 
+                </mat-list>
+
+        </div>
+      </div>
+  
+    </fuse-sidebar>
+  
+    <div class="center">
+  
+      <div class="header accent p-24" fxLayout="row" fxLayoutAlign="space-between center">
+  
+        <div fxLayout="row" fxLayoutAlign="start">
+  
+          <ngx-avatar [name]="patientInfo?.fullName" [size]="100"
+                      [@animate]="{value:'*',params:{delay:'100ms',scale:'0.2'}}"></ngx-avatar>
+  
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <h2 class="ml-24" [@animate]="{value:'*',params:{delay:'50ms',x:'-25px'}}">{{patientInfo?.fullName}}</h2>
+            <!-- <h4 [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">{{CustomerType[patientInfo?.type]}}</h4> -->
+          </div>
+  
+        </div>
+  
+        <button [queryParams]="{ id: patientId }" [routerLink]="'/patient/edit'"
+                class="add-product-button fuse-white mt-24 mt-md-0"
+                mat-raised-button>
+          <span>EDIT</span>
+        </button>
+  
+      </div>
+  
+      <div class="content-card">
+  
+        <div class="toolbar px-24 py-8" fxHide.gt-sm>
+  
+          <button (click)="toggleSidebar('sidebar')" class="sidebar-toggle"
+                  mat-icon-button>
+            <mat-icon>menu</mat-icon>
+          </button>
+  
+          <span>{{patientInfo && patientViewIndex == 0 ? 'General Information' : 'History'}}</span>
+  
+        </div>
+  
+        <div class="content" fusePerfectScrollbar>
+
+            <app-patient-info [patientInfo]='patientInfo' *ngIf='patientViewIndex == 0'></app-patient-info>
+          <!-- <app-customer-summery *ngIf="customerInfo && patientViewIndex==0"
+                                [customerInfo]="customerInfo"></app-customer-summery>
+  
+          <app-customer-purchase-history *ngIf="customerInfo && patientViewIndex==1"
+                                         [medicalId]="customerInfo?.medicalId"></app-customer-purchase-history>
+  
+          <app-customer-documents-view *ngIf="customerInfo && patientViewIndex==2"
+                                         [customerInfo]="customerInfo"></app-customer-documents-view> -->
+        </div>
+  
+      </div>
+  
+    </div>
+  
+  </div>
+  

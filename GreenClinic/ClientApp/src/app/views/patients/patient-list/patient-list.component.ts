@@ -35,14 +35,12 @@ export class PatientListComponent implements OnInit, OnDestroy {
 
   
   
-  ngOnInit(): void {
-    console.log('patients list');
+  ngOnInit(): void {    
     this.loadPatients();
   }
 
   loadPatients(): void {
-    this.patients = this.patientView;
-    console.log(this.patients);
+    this.patients = this.patientView;    
     this.patientView.pageSize = 10;
     this.searchControl.valueChanges
             .pipe(debounceTime(200), distinctUntilChanged())
@@ -77,9 +75,9 @@ export class PatientListComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res === true) {
-        this.patientService.deletePatientById(patient.patientId).subscribe(r => {
+        this.patientService.deletePatientById(patient.id).subscribe(r => {
           console.log(r);
-          this.toastr.success('Patient Deleted.', 'Error!', {progressBar: true});
+          this.toastr.success('Patient Deleted.', 'Success!', {progressBar: true});
           this.patientView.forceRefresh();
         }, err => {
           this.toastr.error('Delete Patient Failed.', 'Error!', {progressBar: true});

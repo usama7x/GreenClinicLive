@@ -7,7 +7,8 @@ import { DatePipe } from '@angular/common';
 @NgModule({
     imports: [SharedComponentsModule],
     entryComponents: [],
-    providers: [DatePipe]
+    providers: [DatePipe],
+    declarations: []
 })
 export class SharedModule {
 

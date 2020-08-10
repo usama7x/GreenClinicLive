@@ -3,6 +3,7 @@ import {Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PatientListComponent } from './patient-list/patient-list.component';
 import { AddPatientComponent } from 'app/shared/components/add-patient/add-patient.component';
+import { PatientDetailComponent } from './patient-detail/patient-detail.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
     path: 'add',
     component: AddPatientComponent,
     data: {breadcrumb: 'addPatient', title: 'Add Patient'}
+  },
+  {
+    path: 'patient/detail',
+    component: PatientDetailComponent,
+    data: {breadcrumb: 'Detail', title: 'Patient Detial'}
   }
 ];
 

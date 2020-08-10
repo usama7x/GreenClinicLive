@@ -27,11 +27,23 @@ namespace GreenClinic.Controllers
         {
             return Ok(_patientHandler.GetPatients(filter));
         }
+        [HttpGet("info/{id}")]
+        public async Task<IActionResult> GetInfoAsync(string id)
+        {
+            return Ok(await _patientHandler.GetPatientInfoAsync(id));
+        }
 
         [HttpPut("updatePatient")]
         public async Task<IActionResult> PutAsync(PatientViewModel patientView)
         {
             return Ok(await _patientHandler.UpsertAsync(patientView));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(string id)
+        {
+           await _patientHandler.DeletePatientAsync(id);
+            return Ok();
         }
     }
 }
