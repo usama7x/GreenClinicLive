@@ -3,14 +3,16 @@ using System;
 using GreenClinic.Data.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GreenClinic.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20200814232142_MedicineStock StockNumber AutoIncrement")]
+    partial class MedicineStockStockNumberAutoIncrement
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,28 +175,20 @@ namespace GreenClinic.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Abbreviation")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("MedicineName")
                         .IsRequired()
-                        .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
-                        .HasMaxLength(80);
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
 
                     b.Property<string>("MedicineType")
+                        .IsRequired()
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
                     b.Property<DateTime>("Stamp")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("UniqueId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("UniqueId");
 
                     b.ToTable("Medicines");
                 });

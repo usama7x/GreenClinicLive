@@ -31,9 +31,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CheckupDetailComponent } from './checkup-detail/checkup-detail.component';
 
 @NgModule({
-    declarations: [SelectPatientComponent, CheckupPatientListComponent],
+    declarations: [SelectPatientComponent, CheckupPatientListComponent, CheckupDetailComponent],
     imports: [
         CheckupsRoutingModule,
         MatBottomSheetModule,
@@ -41,7 +42,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         MatGridListModule, MatRippleModule, MatAutocompleteModule, MatButtonToggleModule, MatMenuModule, MatSidenavModule, MatListModule,
         MatTableModule, MatSortModule, MatPaginatorModule, MatTooltipModule, MatSlideToggleModule, MatBottomSheetModule, MatIconModule,
         MatExpansionModule, MatCardModule, MatInputModule, MatRadioModule, MatTabsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        CommonModule
         
     ],
     entryComponents: [CheckupPatientListComponent]

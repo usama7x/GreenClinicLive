@@ -20,6 +20,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
 import {NgxStripeModule} from 'ngx-stripe';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
     imports: [
@@ -45,9 +46,9 @@ import {NgxStripeModule} from 'ngx-stripe';
         ReactiveFormsModule,
 
     ],
-    declarations: [ConfirmationModalComponent, AddPatientComponent],
-    exports: [ConfirmationModalComponent, AddPatientComponent],
-    entryComponents: [ConfirmationModalComponent]
+    declarations: [ConfirmationModalComponent, AddPatientComponent, SpinnerComponent],
+    exports: [ConfirmationModalComponent, AddPatientComponent, SpinnerComponent],
+    entryComponents: [ConfirmationModalComponent, SpinnerComponent]
 })
 export class SharedComponentsModule {
 

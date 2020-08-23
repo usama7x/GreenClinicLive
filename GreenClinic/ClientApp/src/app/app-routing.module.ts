@@ -15,7 +15,11 @@ const routes: Routes = [
     {
       path: 'checkup',
       loadChildren: () => import('./views/checkups/checkups.module').then(m => m.CheckupsModule)
-    } 
+    }, 
+    {
+      path: 'medicine',
+      loadChildren: () => import('./views/medicines/medicines.module').then(m => m.MedicinesModule)
+    }
 ];
 
 @NgModule({

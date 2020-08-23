@@ -1,0 +1,74 @@
+<div class="page-layout carded fullwidth inner-scroll" id="medicine">
+    <div class="top-bg accent"></div>
+    
+    <div class="center">
+
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+      
+              <button [routerLink]="'/inventory/product'" class="mr-0 mr-sm-16" mat-icon-button>
+                <mat-icon>arrow_back</mat-icon>
+              </button>
+      
+              <div fxLayout="column" fxLayoutAlign="start start">
+                <div *ngIf="isEdit" class="h2">
+                  {{medicine.name}}
+                </div>
+                <div *ngIf="!isEdit" class="h2">
+                  New Product
+                </div>
+              </div>
+      
+            </div>
+      
+            <!-- [disabled]="medicineForm.invalid || medicineNameControl.invalid" -->
+            <button (click)="onComplete()"
+                   
+                    class="save-product-button"
+                    mat-raised-button>
+              <span>{{isEdit ? "UPDATE" : "SAVE"}}</span>
+            </button>
+      
+        </div>
+
+        <div class="content-card">
+            <div class="content p-24" fusePerfectScrollbar>
+                <form #medicineForm="ngForm" class="medicine-form">
+                    <div class="medicine-info">
+                        
+                        <!-- Name -->
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Name</mat-label>
+                            <input [(ngModel)]="medicine.name" [formControl]="medicineNameControl" matInput
+                                name="productName" placeholder="Medicine name" required>
+                            <mat-error *ngIf="medicineNameControl.hasError('required') && medicineNameControl.touched">
+                            Product Name is required
+                            </mat-error>
+                            <mat-error *ngIf="medicineNameControl.hasError('alreadyTaken') && medicineNameControl.touched">
+                            Product Name is already in use
+                            </mat-error>
+                        </mat-form-field>
+
+                           <!-- Symbol -->
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Symbol</mat-label>
+                            <input [(ngModel)]="medicine.abbreviation" matInput maxlength="6"
+                                name="productAbbreviation" placeholder="Medicine Abbreviation">
+                        </mat-form-field>
+
+                          <!-- Type -->
+                          <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Type</mat-label>
+                            <input [(ngModel)]="medicine.type" matInput maxlength="6"
+                                name="productAbbreviation" placeholder="Medicine Abbreviation">
+                        </mat-form-field>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

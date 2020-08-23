@@ -1,0 +1,25 @@
+<div *ngIf="show">
+
+    <div class="backdrop" [ngClass]="{'full-screen' : fullscreen}" [ngStyle]="{'background-color': bdColor}">
+  
+      <div class="la-ball-pulse" [ngClass]="{'medium':'la-2x','large':'la-3x'}[size]" *ngIf="type === 'ball-pulse'">
+        <div [ngStyle]="{'background-color': color}"></div>
+        <div [ngStyle]="{'background-color': color}"></div>
+        <div [ngStyle]="{'background-color': color}"></div>
+      </div>
+  
+      <div class="la-ball-spin-clockwise" [ngClass]="{'medium':'la-2x','large':'la-3x'}[size]" *ngIf="type === 'ball-spin'">
+        <div [ngStyle]="{'background-color': color}"></div>
+        <div [ngStyle]="{'background-color': color}"></div>
+        <div [ngStyle]="{'background-color': color}"></div>
+        <div [ngStyle]="{'background-color': color}"></div>
+        <div [ngStyle]="{'background-color': color}"></div>
+        <div [ngStyle]="{'background-color': color}"></div>
+        <div [ngStyle]="{'background-color': color}"></div>
+        <div [ngStyle]="{'background-color': color}"></div>
+      </div>
+  
+    </div>
+  
+  </div>
+  

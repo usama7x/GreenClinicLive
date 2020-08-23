@@ -3,14 +3,16 @@ using System;
 using GreenClinic.Data.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GreenClinic.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20200814224749_configured 1 to M between Medicine and MedicineStock")]
+    partial class configured1toMbetweenMedicineandMedicineStock
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,28 +175,20 @@ namespace GreenClinic.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Abbreviation")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("MedicineName")
                         .IsRequired()
-                        .HasColumnType("varchar(80) CHARACTER SET utf8mb4")
-                        .HasMaxLength(80);
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
 
                     b.Property<string>("MedicineType")
+                        .IsRequired()
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
                     b.Property<DateTime>("Stamp")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("UniqueId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("UniqueId");
 
                     b.ToTable("Medicines");
                 });
@@ -204,15 +198,12 @@ namespace GreenClinic.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<bool>("Availability")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("MedicineID")
                         .IsRequired()
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("double");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -220,13 +211,7 @@ namespace GreenClinic.Data.Migrations
                     b.Property<DateTime>("Stamp")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("StockNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("StockNumber");
 
                     b.HasIndex("MedicineID");
 

@@ -24,6 +24,7 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedComponentsModule } from './shared/components/shared-components.module';
 import { CheckupsModule } from './views/checkups/checkups.module';
+import { MedicinesModule } from './views/medicines/medicines.module';
 const appRoutes: Routes = [
     {
         path      : '**',
@@ -35,7 +36,7 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         BrowserAnimationsModule,
         BsDatepickerModule.forRoot(),
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
         AppRoutingModule,
         SharedModule,
         PatientsModule,
-        CheckupsModule,        
+        CheckupsModule,
+        MedicinesModule,      
         ToastrModule.forRoot({
             positionClass: 'toast-bottom-right'
         }),

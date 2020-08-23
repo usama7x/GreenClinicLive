@@ -22,7 +22,7 @@ namespace GreenClinic.Data.DatabaseContext
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<CheckupMedicine> CheckupMedicines { get; set; }
         public DbSet<MedicineStock> MedicineStock { get; set; }
-        public DbSet<MedicineStockHistory> PurchaseHistories { get; set; }
+        //public DbSet<MedicineStockHistory> PurchaseHistories { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeExpenditure> EmployeeExpenditures { get; set; }
         public DbSet<Expense> Expenses { get; set; }

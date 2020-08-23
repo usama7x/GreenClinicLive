@@ -11,11 +11,9 @@ namespace GreenClinic.Data.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<MedicineStock> builder)
         {
-            builder.HasMany<MedicineStockHistory>(h => h.PurchaseHistories)
-                .WithOne(s => s.MedicineStock)
-                .HasForeignKey(f => f.MedicineStockID)
-                .IsRequired(true)
-                .OnDelete(DeleteBehavior.Restrict);
+            
+            builder.Property(x => x.StockNumber).ValueGeneratedOnAdd();
+            builder.HasAlternateKey(x => x.StockNumber);
         }
     }
 }

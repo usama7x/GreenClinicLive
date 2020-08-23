@@ -46,6 +46,19 @@ export const navigation: FuseNavigation[] = [
                     bg       : '#F44336',
                     fg       : '#FFFFFF'
                 }
+            },
+            {
+                id       : 'medicines',
+                title    : 'Medicines',               
+                type     : 'item',
+                icon     : 'directions_run',
+                url      : '/medicine',
+                badge    : {
+                    title    : '12',
+                    translate: 'NAV.SAMPLE.BADGE',
+                    bg       : '#F44336',
+                    fg       : '#FFFFFF'
+                }
             }
         ]
     }

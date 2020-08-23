@@ -8,13 +8,15 @@ namespace GreenClinic.Core.DomainObjects
     public class Medicine : Entity
     {        
 
-        [Required, MaxLength(50)]
+        [Required, MaxLength(80)]
         public string MedicineName { get; set; }
+        public int UniqueId { get; set; }
+        public string Abbreviation { get; set; }
 
-        [Required, MaxLength(50)]
+        [MaxLength(50)]
         public string MedicineType { get; set; }
-        public virtual MedicineStock Stock { get; set; }
-
+        public virtual ICollection<MedicineStock> Stock{ get; set; }
+         
         public virtual ICollection<CheckupMedicine> Checkups { get; set; }
     }
 }

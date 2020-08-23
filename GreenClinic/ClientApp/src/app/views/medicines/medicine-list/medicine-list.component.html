@@ -1,0 +1,183 @@
+<div class="page-layout carded fullwidth inner-scroll listing-page" id="products">
+
+    <div class="top-bg accent"></div>
+  
+    <div class="center">
+  
+      <div class="header accent"
+           fxLayout="column" fxLayout.gt-sm="row"
+           fxLayoutAlign="center center" fxLayoutAlign.gt-sm="space-between center">
+  
+        <!-- Title -->
+        <div fxHide.lt-md class="mb-24 mb-md-0"
+             fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon class="s-32 mr-16">shopping_basket</mat-icon>
+          <span class="h1">Products</span>
+        </div>
+  
+        <!-- Search -->
+        <div class="search-wrapper mx-32 mx-md-0">
+          <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon>search</mat-icon>
+            <input #filter [formControl]="searchControl" placeholder=" Search for a product">
+          </div>
+        </div>
+  
+        <!-- Tag Filter-->
+        <!-- <app-tag-filter (clickOutside)="onClickedOutside($event)" (onFilterAdded)="onFilterSelect($event)"
+                        [isProductFilter]="true"></app-tag-filter> -->
+  
+        <div fxLayout="row" fxLayoutAlign="space-between center" [ngClass.lt-md]="'w-75-p'">
+  
+          <!-- Active Products -->
+          <!-- <mat-slide-toggle [checked]="true" (change)="showActiveProducts($event.checked)" color="primary" mat-mini-fab>
+            <span>Active Products</span>
+          </mat-slide-toggle> -->
+  
+          <!-- Add Product -->
+          <div class="ml-20" fxLayout="row" fxLayoutAlign="space-between">
+  
+            <!-- <input #fileInput (change)="onFileChanged($event)" accept=".csv" name="uploadBatchImportFIle"
+                   style="display: none" type="file"/> -->
+            <!-- <button (click)="fileInput.click()" color="primary" mat-mini-fab matTooltip="Import Products">
+              <mat-icon class="mat-18">import_export</mat-icon>
+            </button> -->
+            <a [routerLink]="'add'" color="primary" class="ml-4" mat-mini-fab matTooltip="Add Medicine">
+              <mat-icon>add_circule</mat-icon>
+            </a>
+  
+          </div>
+  
+        </div>
+  
+      </div>
+  
+      <!-- Filter Chips -->
+      <!-- <div>
+        <mat-card-content>
+          <mat-chip-list aria-label="Filters">
+            <mat-chip *ngFor="let chip of items; let i=index" class="mt-3" [ngStyle]="{marginBottom: '12px'}">
+              {{chip.name}}
+              <button (click)="onRemove(chip.productFilter,chip.id,i)" mat-icon-button>
+                <mat-icon>clear</mat-icon>
+              </button>
+            </mat-chip>
+          </mat-chip-list>
+        </mat-card-content>
+      </div> -->
+  
+      <div class="content-card">
+  
+        <mat-table [dataSource]="medicines" class="products-table" fusePerfectScrollbar matSort>
+  
+          <ng-container matColumnDef="itemId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Item No</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.itemId}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="category">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Category</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.rootCategory}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="productName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Product Name</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.productName}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="retailPricePerUnit">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Retail Price</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.retailPricePerUnit|currency}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="costPricePerUnit">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Cost Price</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.costPricePerUnit|currency}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="availablePreRoll">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Prerolls 0.5g</mat-header-cell>
+            <mat-cell *matCellDef="let element"
+            [matTooltipClass]="'listProductTooltip'" matTooltip="Weight: {{element.availablePointFiveGramPreRollQuantity? (element.availablePointFiveGramPreRollQuantity| number:'1.0-2') : 0| number:'1.0-2'}} (g)">{{element.availablePreRoll |number:'1.0-2'}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="availableOneGramPreRoll">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Prerolls 1g</mat-header-cell>
+            <mat-cell *matCellDef="let element"
+            [matTooltipClass]="'listProductTooltip'" matTooltip="Weight: {{element.availableOneGramPreRollQuantity? (element.availableOneGramPreRollQuantity| number:'1.0-2') : 0| number:'1.0-2'}} (g)">{{element.availableOneGramPreRoll |number:'1.0-2'}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="availableQuantity">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Available Qty</mat-header-cell>
+            <mat-cell *matCellDef="let element"
+                    [matTooltipClass]="'listProductTooltip'"  matTooltip="Qty On Hand: {{element.quantityInHand| number:'1.0-2'}} (g)">{{element.quantityInHand - element.availablePreRollQuantity| number:'1.0-2'}} {{element.categorySortId == 11 ? '(g)' : ''}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-menu #menu="matMenu">
+                <button [disabled]="!(user.isProductCreater() || user.isProductUpdater())"
+                   [queryParams]="{id:element.id}" [routerLink]="'/product/edit'" mat-menu-item>
+                  <mat-icon>edit</mat-icon>
+                  <span>Edit</span>
+                </button>
+                <button [queryParams]="{id:element.id}" [routerLink]="'/product/add'"
+                        [disabled]="!(user.isProductCreater() || user.isProductUpdater())" mat-menu-item>
+                  <mat-icon>file_copy</mat-icon>
+                  <span>Clone</span>
+                </button>
+                <button (click)="canDelete(element)" [disabled]="!(user.isProductDeleter())" mat-menu-item>
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete</span>
+                </button>
+                <button (click)="addStock(element)" [disabled]="!(user.isInventoryCreater())" mat-menu-item>
+                  <mat-icon>store</mat-icon>
+                  <span>Add Stock</span>
+                </button>
+                <button (click)="adjustStock(element)" [disabled]="!(user.isInventoryCreater())" mat-menu-item>
+                  <mat-icon>adjust</mat-icon>
+                  <span>Adjust Stock</span>
+                </button>
+                <button (click)="soldToDispensary(element)" mat-menu-item>
+                  <mat-icon>business_center</mat-icon>
+                  <span>Sold to Dispensary</span>
+                </button>
+                <button (click)="transferStock(element)" [disabled]="!(user.isInventoryCreater())" mat-menu-item>
+                  <mat-icon>compare_arrows</mat-icon>
+                  <span>Transfer Stock</span>
+                </button>
+                <button (click)="createPreRollStock(element)" *ngIf="element.usePresetPrice"
+                        [disabled]="!(user.isInventoryCreater())" mat-menu-item>
+                  <mat-icon>camera_roll</mat-icon>
+                  <span>Create Pre-Roll</span>
+                </button>
+                <button [disabled]="!(user.isInventoryCreater() || user.isInventoryUpdater())"
+                        [queryParams]="{id:element.id, sortId:element.categorySortId}" [routerLink]="['stock-history']" mat-menu-item>
+                  <mat-icon>history</mat-icon>
+                  <span>Stock History</span>
+                </button>
+              </mat-menu>
+              <button [matMenuTriggerFor]="menu" mat-button value="user">
+                <mat-icon>settings</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+  
+          <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+  
+        <mat-paginator [length]="productsPaginated?.totalCount" [pageIndex]="productsPaginated?.page - 1"
+                       [pageSizeOptions]="[5, 10, 25, 100]"
+                       [pageSize]="productsPaginated?.pageSize">
+        </mat-paginator>
+  
+      </div>
+  
+    </div>
+  
+  </div>
+  
+  <app-spinner [type]="'ball-pulse'" [show]="loading" [size]="'large'"
+               [color]="'rgb(245, 245, 245)'" [bdColor]="'rgba(0, 0, 0, 0.3)'"></app-spinner>
