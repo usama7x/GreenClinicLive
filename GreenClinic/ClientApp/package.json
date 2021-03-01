@@ -67,7 +67,7 @@
     "ngx-validators": "5.2.1",
     "perfect-scrollbar": "1.4.0",
     "popper.js": "1.16.0",
-    "prismjs": "1.16.0",
+    "prismjs": "1.23.0",
     "rxjs": "6.5.5",
     "web-animations-js": "2.3.2",
     "zone.js": "0.10.3"
